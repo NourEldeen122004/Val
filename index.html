@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Valentine</title>
+
+<style>
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+font-family:Arial;
+overflow:hidden;
+}
+
+.card{
+background:white;
+width:350px;
+height:450px;
+border-radius:20px;
+text-align:center;
+padding:20px;
+box-shadow:0 20px 40px rgba(0,0,0,.2);
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+font-size:16px;
+}
+
+#yesBtn{background:#ff4d6d;color:white;}
+#noBtn{background:#ddd;margin-left:20px;}
+
+.celebrate{
+position:fixed;
+inset:0;
+background:#ff9a9e;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+color:white;
+font-size:32px;
+}
+
+.hidden{display:none;}
+
+#continueBtn{
+margin-top:15px;
+background:white;
+color:#ff4d6d;
+font-weight:bold;
+}
+
+#hearts{
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:999;
+}
+
+
+.heart{
+position:absolute;
+font-size:25px;
+animation:fall 3s linear forwards;
+}
+.loveText {
+  font-size: 18px;
+  max-width: 300px;
+  text-align: center;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+
+@keyframes fall{
+from{transform:translateY(-10vh);opacity:1;}
+to{transform:translateY(110vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+<div id="hearts"></div>
+
+<div class="card">
+<img src="monkey.png" width="250"><br><br>
+<h2>Will you be my Valentine?</h2>
+<button id="yesBtn">Yes 💖</button>
+<button id="noBtn">No 😢</button>
+</div>
+
+<div class="celebrate hidden" id="celebrate">
+
+
+<video src="yes.mp4" autoplay muted loop width="300"></video>
+
+<h1>YAAAAAAY 🎉</h1>
+<p style="font-size:24px;">Love youuu ya roooh albyy 💖</p>
+
+<button id="continueBtn">Continue 👉</button>
+
+</div>
+
+<div class="celebrate hidden" id="finalPage">
+<img src="final.JPG" width="300">
+<p class="loveText">Happy Valentine’s Day dodooo I want u to
+stay by my side forever until the day I die
+you’ll always be the most precious thing in my life,
+my greatest achievement, and the best addition I’ve ever made to my world
+I’ll keep loving you always ya habebe
+because truly my love for you grows stronger every single day. 💖💖💖
+
+ 💖</h1>
+
+</div>
+
+<script>
+const yesBtn=document.getElementById("yesBtn");
+const noBtn=document.getElementById("noBtn");
+const celebrate=document.getElementById("celebrate");
+const continueBtn=document.getElementById("continueBtn");
+const finalPage=document.getElementById("finalPage");
+const hearts=document.getElementById("hearts");
+
+let moveRight = true;
+
+noBtn.onmouseenter = () => {
+  noBtn.style.transform = moveRight
+    ? "translateX(80px)"
+    : "translateX(-80px)";
+
+  moveRight = !moveRight;
+};
+
+
+yesBtn.onclick=()=>{
+celebrate.classList.remove("hidden");
+startHearts();
+};
+
+continueBtn.onclick=()=>{
+celebrate.classList.add("hidden");
+finalPage.classList.remove("hidden");
+startHearts(); // قلوب في الصفحة الأخيرة
+};
+
+
+function startHearts(){
+setInterval(()=>{
+const h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"vw";
+hearts.appendChild(h);
+setTimeout(()=>h.remove(),3000);
+},200);
+}
+</script>
+
+</body>
+</html>
